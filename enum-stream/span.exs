@@ -1,5 +1,9 @@
 defmodule MyList do
-  def span(from, to) do
-    for x <- from..to, do: x
+  def span(from, to) when from > to, do: []
+  def span(from, to), do: [from | span(from + 1, to)]
+
+  def primes_to_to(n) do
+    range = span(2, n)
+    range -- (for a <- range, b <- range, a <= b, a * b <= n, do: a * b)
   end
 end
